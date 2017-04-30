@@ -11,8 +11,7 @@
 ### Instructions
 
 ```
-git clone https://github.coBased on original work of Joseph Redmon https://github.com/prabindh/darknet and its C++ port creator Prabindh Sundareson https://github.com/prabindh/darknet.git
-m/ayushgaud/darknet_ros.git
+git clone https://github.com/ayushgaud/darknet_ros.git
 git submodule init
 git submodule update
 
@@ -21,3 +20,4 @@ catkin_make --pkg darknet_ros
 ```
 ### Contributers
 
+Based on original work of Joseph Redmon https://github.com/prabindh/darknet and its C++ port by Prabindh Sundareson https://github.com/prabindh/darknet.git
