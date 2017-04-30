@@ -11,13 +11,13 @@
 ### Instructions
 
 ```
-cd $ROS_WORPSPACE/src
+cd $ROS_WORKSPACE/src
 git clone https://github.com/ayushgaud/darknet_ros.git
 git submodule init
 git submodule update
 cd darknet
 make darknet-cpp-shared
-cd $ROS_WORPSPACE
+cd $ROS_WORKSPACE
 catkin_make --pkg darknet_ros
 
 ```
