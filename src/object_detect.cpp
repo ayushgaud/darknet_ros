@@ -14,13 +14,7 @@
 #include <chrono>
 
 ArapahoV2* p;
-float thresh = 0.5;
-std::string INPUT_DATA_FILE = ros::package::getPath("darknet_ros") + "/input.names";
-std::string INPUT_CFG_FILE = ros::package::getPath("darknet_ros") + "/input.cfg";
-std::string INPUT_WEIGHTS_FILE = ros::package::getPath("darknet_ros") + "/input.weights";
-
-// static char INPUT_CFG_FILE[]     = "input.cfg";
-// static char INPUT_WEIGHTS_FILE[] = "input.weights";
+float thresh;
 
 void imageCallback(const sensor_msgs::ImageConstPtr& msg)
 {
@@ -103,8 +97,8 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
 
       }// If objects were detected
 
-          cv::imshow("view", image);
-          cv::waitKey(30);
+      cv::imshow("view", image);
+      cv::waitKey(30);
     }
   }
   catch (cv_bridge::Exception& e)
@@ -120,8 +114,16 @@ int main(int argc, char **argv)
   cv::namedWindow("view");
   cv::startWindowThread();
   image_transport::ImageTransport it(nh);
-  image_transport::Subscriber sub = it.subscribe("/camera/image_raw", 1, imageCallback);
   
+  image_transport::Subscriber sub = it.subscribe("/camera/image_raw", 1, imageCallback);
+
+  std::string ros_path = ros::package::getPath("darknet_ros");
+
+  INPUT_DATA_FILE = ros_path + "/" + INPUT_DATA_FILE;
+  INPUT_WEIGHTS_FILE = ros_path + "/" + INPUT_WEIGHTS_FILE;
+  INPUT_CFG_FILE = ros_path + "/" + INPUT_CFG_FILE;
+  thresh = std::stof(threshold);
+
   // Initialize darknet object using Arapaho API
   p = new ArapahoV2();
   if(!p)

@@ -19,7 +19,7 @@ cd darknet
 make darknet-cpp-shared
 cd $ROS_WORKSPACE
 catkin_make --pkg darknet_ros
-
+roslaunch darknet_ros object_detect.launch
 ```
 ### Contributers
 
