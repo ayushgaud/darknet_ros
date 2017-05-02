@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <launch>
 	<node pkg="darknet_ros" name="darknet_ros_wrapper" type="darknet_ros_node">
-		<param name="name_file" value="input.name"/>
-		<param name="weights_file" value="input.weights"/>
-		<param name="cfg_file" value="input.cfg"/>
+		<param name="name_file" value="$(find darknet_ros)/input.name"/>
+		<param name="weights_file" value="$(find darknet_ros)/input.weights"/>
+		<param name="cfg_file" value="$(find darknet_ros)/input.cfg"/>
 		<param name="thresh" value="0.5"/>
-		<remap from="/camera/image_raw" to="/bebop/image_raw"/>
+		<remap from="/camera/image_raw" to="/camera/rgb/image_raw"/>
 	</node>
 </launch>
