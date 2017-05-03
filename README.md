@@ -6,7 +6,9 @@
 
 ### Dependencies
 1. CUDA  
-2. ROS Kinetic
+2. CUDNN (Optional, can be disabled in the darknet Makefile)
+2. ROS Kinetic/Indigo
+
 
 ### Instructions
 

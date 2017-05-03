@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(darknet_ros)
-set (CMAKE_CXX_STANDARD 11)
+
+if (CMAKE_VERSION VERSION_LESS "3.1")
+  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set (CMAKE_CXX_FLAGS "--std=gnu++11 ${CMAKE_CXX_FLAGS}")
+  endif ()
+else ()
+  set (CMAKE_CXX_STANDARD 11)
+endif ()
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
