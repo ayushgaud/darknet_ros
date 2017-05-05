@@ -117,7 +117,6 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
       }// If objects were detected
       objPub_.publish(tObjMsg);
       imgPub_.publish(cv_ptr_->toImageMsg());
-      cv::imshow("view", cv_ptr_->image);
       cv::waitKey(30);
       cv_ptr_.reset();
     }
@@ -131,30 +130,22 @@ void imageCallback(const sensor_msgs::ImageConstPtr& msg)
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "image_listener");
-  ros::NodeHandle nh;
-  cv::namedWindow("view");
-  cv::startWindowThread();
+  ros::NodeHandle nh("~");
 
   objPub_ = nh.advertise<darknet_ros::DetectedObjects>( "/darknet_ros/detected_objects", 1);
   
 
   std::string ros_path = ros::package::getPath("darknet_ros");
   
-  ros::NodeHandle priNh( "~" );
   std::string yoloWeightsFile;
   std::string yoloConfigFile;
   std::string yoloDataFile;
   
-  priNh.param<std::string>( "weights_file", yoloWeightsFile, ros_path + "/input.weights" );
-  priNh.param<std::string>( "cfg_file", yoloConfigFile, ros_path+"/input.cfg" );
-  priNh.param<std::string>( "data_file", yoloDataFile, ros_path+"/input.name" );
-  priNh.param( "thresh", thresh, 0.2f );
-/*
-  std::string INPUT_DATA_FILE = ros_path + "/" + INPUT_DATA_FILE;
-  std::string INPUT_WEIGHTS_FILE = ros_path + "/" + INPUT_WEIGHTS_FILE;
-  std::string INPUT_CFG_FILE = ros_path + "/" + INPUT_CFG_FILE;
-  thresh = std::stof(threshold);
-*/
+  nh.param<std::string>( "weights_file", yoloWeightsFile, ros_path + "/tiny-yolo-voc.weights");
+  nh.param<std::string>( "cfg_file", yoloConfigFile, ros_path + "/darknet/cfg/tiny-yolo-voc.cfg");
+  nh.param<std::string>( "name_file", yoloDataFile, ros_path + "/darknet/data/voc.names" );
+  nh.param( "thresh", thresh, 0.2f );
+
   // Initialize darknet object using Arapaho API
   p = new ArapahoV2();
   if(!p)
@@ -164,9 +155,9 @@ int main(int argc, char **argv)
 
     // TODO - read from arapaho.cfg    
   ArapahoV2Params ap;
-  ap.datacfg = (char *)yoloDataFile.c_str();//INPUT_DATA_FILE.c_str();
-  ap.cfgfile = (char *)yoloConfigFile.c_str();//INPUT_CFG_FILE.c_str();
-  ap.weightfile = (char *)yoloWeightsFile.c_str();//INPUT_WEIGHTS_FILE.c_str();
+  ap.datacfg = (char *)yoloDataFile.c_str();
+  ap.cfgfile = (char *)yoloConfigFile.c_str();
+  ap.weightfile = (char *)yoloWeightsFile.c_str();
   ap.nms = 0.4;
   ap.maxClasses = 20;
   int expectedW = 0, expectedH = 0;
@@ -186,7 +177,6 @@ int main(int argc, char **argv)
   image_transport::Subscriber sub = it.subscribe("/camera/image_raw", 1, imageCallback);
   
   ros::spin();
-  cv::destroyWindow("view");
   if(p) delete p;
   DPRINTF("Exiting...\n");
   return 0;
