@@ -128,7 +128,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES darknet_ros
-#  CATKIN_DEPENDS cv_bridge image_transport roscpp std_msgs
+  CATKIN_DEPENDS cv_bridge image_transport roscpp std_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -161,7 +161,7 @@ add_executable(darknet_ros_node src/object_detect.cpp
   ${PROJECT_SOURCE_DIR}/darknet/arapaho/arapaho.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(darknet_ros_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(darknet_ros_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 add_library(darknet-cpp-shared SHARED IMPORTED)
 set_target_properties(darknet-cpp-shared PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/darknet/libdarknet-cpp-shared.so)
