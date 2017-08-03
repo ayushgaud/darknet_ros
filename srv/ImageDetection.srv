@@ -1,0 +1,4 @@
+sensor_msgs/Image msg
+---
+sensor_msgs/Image img
+darknet_ros/DetectedObjects objects

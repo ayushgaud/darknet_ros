@@ -5,6 +5,6 @@
 		<param name="weights_file" value="$(find darknet_ros)/tiny-yolo-voc.weights"/>
 		<param name="cfg_file" value="$(find darknet_ros)/darknet/cfg/tiny-yolo-voc.cfg"/>
 		<param name="thresh" value="0.5"/>
-		<remap from="/camera/image_raw" to="/bebop/image_raw"/>
+		<remap from="/camera/image_raw" to="/camera/rgb/image_raw"/>
 	</node>
 </launch>
