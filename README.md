@@ -2,7 +2,7 @@
 
 ![Darknet Logo](http://pjreddie.com/media/files/darknet-black-small.png)
 
-**Author** Ayush Gaud
+**Authors** Ayush Gaud and Vignesh Prasad
 
 ### Dependencies
 1. CUDA  
