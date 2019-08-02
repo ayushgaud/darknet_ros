@@ -25,4 +25,4 @@ roslaunch darknet_ros object_detect.launch
 ```
 ### Contributers
 
-Based on original work of Joseph Redmon https://github.com/prabindh/darknet and its C++ port by Prabindh Sundareson https://github.com/prabindh/darknet.git
+Based on original work of Joseph Redmon https://github.com/pjreddie/darknet and its C++ port by Prabindh Sundareson https://github.com/prabindh/darknet.git
